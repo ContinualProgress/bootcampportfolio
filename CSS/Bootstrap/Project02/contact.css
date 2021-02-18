@@ -1,0 +1,79 @@
+body, html {
+  height: 100%;
+}
+
+
+.bg {
+  /* The image used */
+  background-image: url("assets/contact.jpg");
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+#logo {
+
+  font-size: 30px;
+  margin-left: 10px;
+
+}
+
+
+#caption {
+
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+}
+
+
+.innercaption {
+  
+  color: white;
+  font-size: 45px;
+  font-family: Roboto, sans-serif;
+  line-height: 1.2;
+  
+
+}
+
+
+.footerlinks {
+
+  list-style-type: none;
+  text-align: left;
+
+}
+
+
+#footerlogo {
+
+  color: white;
+  font-size: 30px;
+
+}
+
+
+.menuitem {
+
+  color: white;
+  text-decoration: none;
+  
+
+}
+
+
+.spacing {
+
+  line-height: 2.5;
+
+}
