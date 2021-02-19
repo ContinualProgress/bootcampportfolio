@@ -2,7 +2,7 @@ body, html {
   height: 100%;
 }
 
-.bg {
+body {
   /* The image used */
   background-image: url("background.jpg");
 
@@ -10,19 +10,12 @@ body, html {
   height: 100%;
 
   /* Center and scale the image nicely */
+  /*
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-}
-
-#caption {
-
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-
+  */
+  background: red url("background.jpg") center cover;
 }
 
 
@@ -32,7 +25,21 @@ body, html {
   font-size: 45px;
   font-family: Roboto, sans-serif;
   line-height: 1.2;
+  border: 1px solid red;
+  width: 45%;
+  margin: 20% auto;
+  text-align: center;
+  margin-bottom: 0;
   
+
+}
+
+
+.btn {
+
+  display: block;
+  margin: 0 auto;
+  border: 1px solid orange; 
 
 }
 
