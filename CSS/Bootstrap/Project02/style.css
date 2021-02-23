@@ -1,0 +1,99 @@
+html, body {
+
+  height: 100%;
+
+}
+
+
+#background1 {
+
+  background: url('img/backgrounds/background1.jpg') center center no-repeat;
+  color: white;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+}
+
+
+#background2 {
+
+  background: url('img/backgrounds/background2.jpg') center center no-repeat;
+  color: white;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+}
+
+
+#background3 {
+
+  background: url('img/backgrounds/background3.jpg') center center no-repeat;
+  color: white;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+}
+
+
+.navicon {
+
+  font-size: 30px;
+  padding-right: 10px;
+
+}
+
+
+#message {
+
+  width: 40%;
+  margin: 0 auto;
+  text-align: center;
+
+}
+
+
+#the-footer {
+
+  background-color: #263238;
+  color: white;
+  padding: 50px 0;
+
+
+}
+
+
+#the-footer h6 {
+
+  color: #1E88E5;
+
+}
+
+
+#the-footer a {
+
+  color: white;
+
+}
+
+
+/*About Page*/
+.section {
+
+  padding: 112px 0;
+  overflow: hidden;
+
+}
+
+
+.middle {
+
+  background-color: #262F36;
+  color: white;
+
+}
