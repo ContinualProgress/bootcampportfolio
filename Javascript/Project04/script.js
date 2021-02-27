@@ -1,35 +1,30 @@
 
 
 
-let myImages = new Array();
-
-myImages.push("var(--background-1)");
-myImages.push("var(--background-2)");
-myImages.push("var(--background-3)");
+let myImages = ['assets/background1.jpg', 'assets/background2.jpg', 'assets/background3.jpg'];
 
 let counter = 0;
 let elem = document.querySelector("#background1");
 
+elem.style.background = `url( ${myImages[counter]} )`;
+counter++;
+
+
 function switchImage() {
 
-  //elem = document.getElementById("background1");
-  if (counter > myImages.length) {
+  if (counter >= myImages.length) {
 
     counter = 0;
   
   }
  
-  elem.style.background = myImages[counter];
+  elem.style.background = `url( ${myImages[counter]} )`;
+  console.log("Background: " + elem.style.background);
   counter++;
-
-  
-  setTimeout( switchImage, 3000 );
 
 }
 
-
-switchImage();
-
+setInterval( switchImage, 3000);
 
 
 

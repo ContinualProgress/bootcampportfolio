@@ -1,25 +1,13 @@
-:root {
-
-  --background-1: url('assets/background1.jpg') center center no-repeat;
-  --background-2: url('assets/background2.jpg') center center no-repeat;
-  --background-3: url('assets/background3.jpg') center center no-repeat;
-
-}
-
-
 html, body {
 
   height: 100%;
+  margin: 0 auto;
 
 }
-
-
-
 
 
 #background1 {
 
-  background: var(--background-1);
   color: white;
   height: 100%;
   width: 100%;
@@ -31,6 +19,7 @@ html, body {
 
 #message {
 
+  text-transform: uppercase;
   font-size: 54px;
   width: 900px;
   margin: 20% auto;
