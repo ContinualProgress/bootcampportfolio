@@ -71,15 +71,21 @@ function displayDate() {
   }
 
 
+  //Store the formatted value in a variable and print the result to the console.
   result = `${myHours}:${myMinutes}:${mySeconds}`;
   console.log(result);
 
-
+  //Update the div referenced by elem.
   elem.innerHTML = result;
+
+  //Initialize counter to zero if its value is greater than or equal to 
+  //the length of the array.
   if (counter >= myColors.length)
   {
     counter = 0;  
   }
+
+  //Update the color of the body.
   console.log("Current color: " + myColors[counter]);
   myBod.style.background = myColors[counter];
   counter++;
