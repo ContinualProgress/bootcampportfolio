@@ -1,12 +1,10 @@
-body {
-
-
-}
 
 
 #myHeader {
 
-  display: block;
+  width: 53%;
+  margin: 0 auto;
+  padding-left: 8px;
 
 }
 

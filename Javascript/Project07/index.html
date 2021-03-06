@@ -5,16 +5,21 @@
     <link rel="stylesheet" href="style.css" type="text/css">
   </head>
   <body>
+
+    <div id="myHeader">
+      <h1>Please enter your name and email to enter our raffle!</h1>
+    </div>
     <div id="myForm">
-      <form>
+      <form action="" onsubmit="return Validation()">
         <label for="theEmail">Email</label><br>
-        <input type="email" name="theEmail" placeholder="roger@rabbit.com"></input>
+        <input id="emailValue" type="email" name="theEmail" placeholder="roger@rabbit.com">
         <br><br>
         <label for="thePassword">Password</label><br>
-        <input type="text" name="thePassword"></input>
-        <button type="button">Submit</button>
+        <input id="passwordValue" type="password" name="thePassword"><br><br>
+        <input type="submit" value="Submit">
       </form>
     </div>
+
   <script src="script.js"></script>
   </body>
 </html>
