@@ -1,0 +1,120 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+
+
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <style>
+            #first_div {
+                width: 20vw;
+                height: 100px;
+                padding: 5% 10%;
+                background-color: skyblue;
+                border: 3px solid darkblue;
+                font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+                margin: auto;
+                text-align: center;
+            }
+            .first_span {
+                margin: auto;
+            }
+            #second_div {
+                width: 20vw;
+                height: 100px;
+                padding: 5% 10%;
+                background-color: beige;
+                border: 3px solid brown;
+                font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+                margin: auto;
+                text-align: center;
+            }
+            .second_span {
+                margin: auto;
+            }
+            #button {
+                margin: auto;
+                text-align: center;
+            }
+            #button2 {
+                margin: auto;
+                text-align: center;
+            }
+        </style>
+        <div id="first_div">
+            <span class="first_span">Web development is fun.</span>
+        </div>
+        <div id="second_div">
+            <span class="second_span">Web development is cool.</span>
+        </div><br>
+        <div id="button"><button onclick="startStop()">Stop</button></div>
+
+
+        <script>
+            document.querySelector('span').style.color = "red";
+            var firstDiv = document.getElementById('first_div');
+            var secondDiv = document.getElementById('second_div');
+            var isBeige = true;
+
+
+            var toggling = true;
+ 
+            function switchColors() {
+
+              if(!isBeige)
+              {
+                firstDiv.style.background = 'beige';
+                secondDiv.style.background = 'skyblue';
+              }
+              else
+              {
+                 firstDiv.style.background = 'skyblue';
+                 secondDiv.style.background = 'beige';
+              }
+              isBeige = !isBeige;
+
+            }// switchColors
+
+
+
+            function startStop() {
+
+              console.log("Running startStop");
+              console.log("Value of toggling: " + toggling);
+
+              if (toggling)
+              {
+                console.log("Value of toggling before clearing interval: " + toggling);
+                clearInterval(intervalId);
+                console.log("Value of toggling after clearing interval: " + toggling);
+              }
+
+
+              else
+              {
+                console.log("Value of toggling before setting interval: " + toggling);
+                intervalId = setInterval(switchColors, 1000);
+                console.log("Value of toggling after setting interval: " + toggling);
+              }
+
+              console.log("Value of toggling before inverting boolean value: " + toggling);
+              toggling = !toggling;
+              console.log("Value of toggling after inverting boolean value: " + toggling);
+
+            }// startStop
+
+            var intervalId = setInterval(switchColors, 1000);
+
+        </script>
+
+
+    </body>
+</html>
