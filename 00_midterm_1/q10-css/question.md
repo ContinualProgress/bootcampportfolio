@@ -6,3 +6,15 @@
 
 
 ### Answer:
+
+
+QUESTION 1:
+
+  1)  Reduce CSS code whenever possible.
+  2)  Avoid/Limit the use of expensive (computationally intensive) CSS properties.
+
+
+QUESTION 2:
+
+  1)  Use adaptive images
+  2)  Cache images
