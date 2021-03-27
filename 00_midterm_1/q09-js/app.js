@@ -39,3 +39,19 @@ var myArray4 = [11, 12, 13];
 console.log(myArray4);
 myArray4 = myArray4.concat(14);
 console.log(myArray4);
+
+
+//QUESTION B
+
+
+const array = [2, 5, 9];
+
+console.log(array);
+
+const index = array.indexOf(5);
+if (index > -1) {
+  array.splice(index, 1);
+}
+
+// array = [2, 9]
+console.log(array);
