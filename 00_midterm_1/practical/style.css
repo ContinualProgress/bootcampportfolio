@@ -1,0 +1,27 @@
+
+
+
+body {
+
+  background-color: #2b2821;
+
+}
+
+
+#theTitle {
+
+  text-align: center;
+  color: white;
+
+}
+
+
+#theForm {
+
+  width: 40%;
+  border: 1px solid white;
+  color: white;
+  margin: auto;
+
+
+}
