@@ -10,3 +10,9 @@
 5.  None of the above
 
 ### Please write your answer here:
+
+Answer(s):
+
+1.  In HTML a CSS font-family is used to specify a prioritized list of fonts.
+2.  A font-family is a grouping of fonts defined by shared design styles.
+3.  Font Families' members are differentiated by a character's shape display (stroke weight, slant, relative width, etc.).

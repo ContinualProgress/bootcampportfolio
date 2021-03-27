@@ -7,3 +7,5 @@
 5. Exhaustive set of animations and effects.
 
 ### Please write your answer here:
+
+Answer:  Can be used in a browser as well as on a server (the backend).

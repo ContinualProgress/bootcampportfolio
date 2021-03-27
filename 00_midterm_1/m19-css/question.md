@@ -10,3 +10,4 @@
 
 ### Please write your answer here:
 
+Answer:  `h1 {background-color: #FFF}`

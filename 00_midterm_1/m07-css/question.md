@@ -6,3 +6,5 @@
 4. defines how position elements horizontally
 
 ### Please write your answer here:
+
+Answer:  define the main axis of positioned elements and the direction

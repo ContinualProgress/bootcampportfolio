@@ -15,3 +15,38 @@ Hints:
             myArray = []    // will replace the original myArray with an empty array
 
 ### Answer:
+
+
+***Example of Method 4:***
+//Method 1
+var myArray = [1,2,3,4];
+var counter = 0;
+var numElements = myArray.length
+
+console.log(myArray);
+
+for (counter; counter < numElements; counter++) {
+
+  myArray.pop();
+
+}
+
+console.log(myArray);
+
+
+
+***Example of Method 3***
+var myArray = [1,2,3,4];
+
+console.log(myArray);
+myArray.splice(0);
+console.log(myArray);
+
+
+
+***Example of Method 2***
+var myArray = [1,2,3,4];
+console.log(myArray);
+
+myArray.length = 0;
+console.log(myArray);

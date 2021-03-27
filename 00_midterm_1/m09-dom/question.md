@@ -12,3 +12,4 @@ document.querySelector("div p")
 
 ### Please write your answer here:
 
+Answer:  first p element inside a div element on a page

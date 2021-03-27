@@ -7,3 +7,12 @@ Please answer the following with maximum 50 words each (keep it short):
 
 
 ### Please post your answer here:
+
+Question 1:  
+   - Branching allows you to make new changes without altering the master copy (initially).
+   - Reverting back to a previous state (git reset) is a quick way to correct mistakes.
+
+
+Question 2:
+   - The branching facility allows a developer to stop a task to work on hotfix, without any disruption to the previous task.
+   - The tagging facility (git tag) allows for readily tracking major/minor versions of a software project.

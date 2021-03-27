@@ -11,3 +11,6 @@
 5. None of the above
 
 ### Please write your answer here:
+
+
+Answer:  The return value of `setTimeout` is a numerical ID which can be used to cancel the timer by using the `clearTimeout` function.

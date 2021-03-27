@@ -11,3 +11,8 @@ Please describe what would be the output of the following code snippet on mobile
     </div>
 ```
 ### Answer:
+
+
+On a desktop:  The four inner divs (their values) would occupy a single row.
+
+On a mobile device:  Each of the four inner divs (their values) would occupy their own row.

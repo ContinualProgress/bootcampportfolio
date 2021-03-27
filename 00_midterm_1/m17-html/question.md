@@ -9,3 +9,4 @@
 
 ### Please write your answer here:
 
+Answer:  `<img   src="image.gif"  alt="dog">`

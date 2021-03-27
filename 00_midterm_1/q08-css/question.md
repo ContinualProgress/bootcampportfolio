@@ -23,4 +23,12 @@ Hint: You need to view these images. To view them use one of the following techn
 
 ### Answer A:
 
+The color would be red:  That value is encased in an html element (span) with a class of (highlight), where the color is designated as red.
+
+
+
 ### Answer B:
+
+(NOTE:  This is based on the assumption that A has nothing to do with B):
+
+The color would be blue:  The span is encased in a list element tag where the id is "#must-by," which designates a color of blue.
