@@ -71,3 +71,71 @@ Remember this review is a test of how well prepared you are. You need an honest 
 2. Credit is given for partially complete or partly correct answers as well. Hence do not skip questions, unless indicated.
 
 3. Do attempt the practical portion and push it, even if it doesn't work. Even non-working code may attract enough credit to put you over the 70% mark. Some life lessons here :=)
+
+Results
+
+m1. 2
+
+m2. 2
+
+m3. 2
+
+m4. 0
+
+m5. 0
+
+m6. 0
+
+m7. 2
+
+m8. 2
+
+m9. 2
+
+m10. 2
+
+m11. 2
+
+m12. 2
+
+m13. 2
+
+m14. 2
+
+m15. 2
+
+m16. 2
+
+m17. 2
+
+m18. 2
+
+m19. 3
+
+m20. 1.5
+
+q1. 2.50
+
+q2. 1.25
+
+q3. 2.50
+
+q4. 1.25
+
+q5. 1.25
+
+q6. 2.50
+
+q7. 2.50
+
+q8. 1.25
+
+q9. 2.50
+
+q10. 1.50
+
+q11. 2.50
+
+q12. 2.50
+
+Practical: 25/30
