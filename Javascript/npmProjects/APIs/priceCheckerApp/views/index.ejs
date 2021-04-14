@@ -1,0 +1,43 @@
+<%- include('partials/header')  %>
+
+<div class="container d-flex justify-content-center">
+  <form action="/getPrice">
+
+    <h1 class="my-4 text-center">BitCoin Price App</h1>
+    <div class="d-flex justify-content-center"> 
+      <div class="form-check form-check-inline">
+	<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="USD" checked>
+	<label class="form-check-label" for="inlineRadio1">USD</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+	<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="GBP">
+	<label class="form-check-label" for="inlineRadio2">GBP</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+	<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="EUR">
+	<label class="form-check-label" for="inlineRadio3">EUR</label>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <input class="btn btn-primary my-4 d-block btn-lg" id="btn" type="submit" value="Get Price" /> 
+    </div>
+
+
+    <!-- This is for the result.-->
+    <div class="h2" id="output">
+      This is the current price:
+      <div class="d-flex justify-content-center my-4">
+        <%- result %>
+      </div>
+    </div>
+    <h6 class="text-center"><a href="https://www.coindesk.com/">Powered by CoinDesk</a></h6>
+
+  </form>
+
+
+</div>
+  
+<%- include('partials/footer')  %>
