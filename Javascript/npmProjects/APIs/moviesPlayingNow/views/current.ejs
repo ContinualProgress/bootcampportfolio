@@ -1,0 +1,18 @@
+<%- include('partials/header')  %> 
+  <div class="container my-4" id="now_playing">
+    <h1>Now Playing at a Theater Near You:</h1>
+
+    <% results.results.forEach(function(element) {%>
+      <div class="row">
+        <div class="col-8">
+	  <h1><%= element.title %></h1>
+	  <h6 style="line-height: 1.6;"><%= element.overview %></h6>
+	  <h6 class="my-4">Rating: <%= element.vote_average %> out of 10 stars.</h6>
+	  <img class="mb-4" src="https://image.tmdb.org/t/p/w342/<%= element.poster_path %>" alt="poster">
+	  <hr>
+        </div>
+      </div>
+    <% }) %>
+
+  </div>
+<%- include('partials/footer')  %> 
