@@ -1,0 +1,43 @@
+
+
+body {
+
+  background-color: #a1eeff;
+
+}
+
+
+.centering {
+
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+
+}
+
+
+#btn {
+
+  width: 165px; 
+  height: 65px;
+  border-radius: 14px;
+  font-size: 24px;
+  color: white;
+  border: 1px solid white;
+  background-color: navy;
+
+}
+
+
+#priceHeader {
+
+  font-size: 30px;
+
+}
+
+
+#result {
+ 
+  font-size: 40px;
+
+}
