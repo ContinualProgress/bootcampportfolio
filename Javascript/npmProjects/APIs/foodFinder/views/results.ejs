@@ -1,19 +1,22 @@
 <%- include('partials/header')  %>
 
-    <% results.forEach(function(elem) {%>
-      <p><%= elem.name %>: <%= elem.price %> <%= elem.rating %></p>
+    <div class="container">
+      <h1 id="results-header">Here are some great places near by:</h1>
+      <% results.forEach(function(elem) {%>
 
-      <% if(elem.rating%1 == 0) {%>
-	<% stars = `/images/regular/regular_${elem.rating}.png`%>
-      <% } else {%>
-	<% stars = `/images/regular/regular_${Math.floor(elem.rating)}_half.png`%>
-      <% } %>
+	<% if(elem.rating%1 == 0) {%>
+	  <% stars = `/images/regular/regular_${elem.rating}.png`%>
+	<% } else {%>
+	  <% stars = `/images/regular/regular_${Math.floor(elem.rating)}_half.png`%>
+	<% } %>
 
-      <p>Stars:
-	<img src="<%= stars %>" alt="stars">
-      </p>
+	<div id="results-entry" class="my-1">
+	  <%= elem.name %> <img src=<%= stars %> alt="stars">
+	</div>
 
-
-<% }) %>
+      <% }) %>
+      <h5 id="search-again">Search again?</h5>
+      
+    </div>
 
 <%- include('partials/footer')  %>

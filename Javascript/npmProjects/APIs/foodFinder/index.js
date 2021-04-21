@@ -28,12 +28,12 @@ app.get("/locationSearch", function(req, res){
 
   client.search({
     location: req.query.locale,
+    limit: 10,
   }).then(response => {
 
     console.log(response.jsonBody.businesses);
     let results = response.jsonBody.businesses;
     console.log("Type of results:  " + typeof results);
-    //res.send(results);
     res.render("results", {results});
 
   }).catch(e => {
