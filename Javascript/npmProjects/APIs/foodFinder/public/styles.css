@@ -1,0 +1,15 @@
+html, body {
+
+  height: 100%;
+
+}
+
+
+#the-footer {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+
+}

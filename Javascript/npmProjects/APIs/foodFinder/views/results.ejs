@@ -1,0 +1,19 @@
+<%- include('partials/header')  %>
+
+    <% results.forEach(function(elem) {%>
+      <p><%= elem.name %>: <%= elem.price %> <%= elem.rating %></p>
+
+      <% if(elem.rating%1 == 0) {%>
+	<% stars = `/images/regular/regular_${elem.rating}.png`%>
+      <% } else {%>
+	<% stars = `/images/regular/regular_${Math.floor(elem.rating)}_half.png`%>
+      <% } %>
+
+      <p>Stars:
+	<img src="<%= stars %>" alt="stars">
+      </p>
+
+
+<% }) %>
+
+<%- include('partials/footer')  %>
