@@ -1,0 +1,9 @@
+SELECT first_name || ' ' || last_name AS "Full Name", 
+       salary
+FROM employees
+WHERE salary >= 3000
+AND salary <= 4000;
+SELECT first_name || ' ' || last_name AS "Full Name", 
+       salary
+FROM employees
+WHERE salary BETWEEN 3000 AND 4000;

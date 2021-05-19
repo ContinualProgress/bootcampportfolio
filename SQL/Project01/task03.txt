@@ -1,0 +1,16 @@
+SELECT first_name || ' ' || last_name AS "Full Name",
+       salary
+FROM hr.employees
+WHERE salary > 8000;
+SELECT first_name || ' ' || last_name AS "Full Name",
+       to_char(hire_date, 'YYYY-MM-DD') AS "Hire Date",
+       salary
+FROM hr.employees
+WHERE EXTRACT(YEAR FROM hire_date) > 1996;
+SELECT MIN(salary)
+FROM hr.employees;
+SELECT first_name || ' ' || last_name AS "Full Name",
+       to_char(salary + COALESCE(salary*commission_pct, 0), '99,999,999.00' ) AS "Total Compensation"
+FROM employees
+where salary = (SELECT MIN(salary)
+FROM hr.employees);

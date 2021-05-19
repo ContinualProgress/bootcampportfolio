@@ -1,0 +1,6 @@
+SELECT e.first_name || ' ' || LEFT(e.last_name, 6) AS "Full Name",
+       j.job_title,
+       e.salary
+FROM hr.employees e JOIN jobs j
+ON (e.job_id = j.job_id)
+WHERE char_length(last_name) > 6;

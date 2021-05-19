@@ -1,0 +1,6 @@
+SELECT EXTRACT(YEAR FROM hire_date) as "year_of_hiring",
+count( EXTRACT(YEAR FROM hire_date) ) as "num_hired"
+FROM employees
+GROUP BY (EXTRACT(YEAR FROM hire_date))
+HAVING count( EXTRACT(YEAR FROM hire_date) )>= 2
+ORDER BY (EXTRACT(YEAR FROM hire_date) ) ASC;

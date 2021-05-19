@@ -1,0 +1,11 @@
+SELECT e.first_name || ' ' || e.last_name AS "Full Name",
+       d.department_name
+FROM employees e JOIN departments d
+ON (e.department_id = d.department_id);
+SELECT e.first_name || ' ' || e.last_name AS "Full Name",
+       d.department_name,
+       to_char(e.hire_date, 'YYYY-MM-DD')
+FROM employees e JOIN departments d
+ON (e.department_id = d.department_id)
+WHERE d.department_name = 'Sales'
+ORDER BY (hire_date) DESC;

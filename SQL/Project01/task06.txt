@@ -1,0 +1,31 @@
+SELECT e.first_name, 
+       e.last_name, 
+       e.email,
+       m.first_name as "Manager",
+       d.department_name as "Department",
+       l.city as "City"
+FROM employees e
+LEFT JOIN employees m 
+  ON (m.employee_id = e.manager_id)
+JOIN departments d
+  ON (e.department_id = d.department_id)
+JOIN locations l
+  ON (l.location_id = d.location_id)
+WHERE d.department_name = 'Executive';
+
+
+
+SELECT e.first_name, 
+       e.last_name, 
+       e.email,
+       m.first_name as "Manager",
+       d.department_name as "Department",
+       l.city as "City"
+FROM employees e
+LEFT JOIN employees m 
+  ON (m.employee_id = e.manager_id)
+JOIN departments d
+  ON (e.department_id = d.department_id)
+JOIN locations l
+  ON (l.location_id = d.location_id)
+ORDER BY ("Department");
