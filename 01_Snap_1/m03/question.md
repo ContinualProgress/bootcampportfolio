@@ -7,4 +7,4 @@
 3. response.render(locals, callback)
 4. response.status(404)
 
-## Answer:
+## Answer: 3

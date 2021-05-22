@@ -10,4 +10,4 @@
 
 Choose all correct answers. All answers needed for full credit.
 
-## Answer:
+## Answer: 2, 4, 5

@@ -7,7 +7,7 @@
 3. db.restaurants.find({ "borough" == "Queens" })
 4. db.restaurants.find({ "borough" : "Queens" })
 
-### Answer:
+### Answer: 2, 4
 
 
 ### MONGODB CONNECTION:
