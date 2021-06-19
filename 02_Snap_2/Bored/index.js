@@ -3,6 +3,13 @@ const app = express()
 const fetch = require('node-fetch')
 const port = process.env.PORT || 8080
 
+
+//EJS Basic Setup
+app.set("view engine", "ejs");
+app.use(express.static("public") );
+
+
+
 app.get('/', (req, res) => {
     let types = ["education", "recreational", "social", "diy", "charity", "cooking", "relaxation", "music", "busywork"]
     res.render('home.ejs', { type: types })
