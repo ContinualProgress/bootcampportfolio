@@ -12,7 +12,7 @@ class Arbuckle03 extends Component {
  
    <div>
      <h1>Things that Garfield Hates</h1> 
-     <ul>
+     <ul style={{listStyleType: "none"}}>
        {favorite_foods.map(food => <li>{food}</li>)} 
      </ul> 
    </div> 
