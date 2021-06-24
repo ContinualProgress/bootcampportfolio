@@ -1,0 +1,22 @@
+import React, { Component } from 'react';
+import logo from './logo.svg';
+import Bio from "./Bio"
+import {resources} from "./resources";
+import Resource from "./Resource";
+
+class App extends Component {
+ render() {
+
+   let resourceList = []
+   resources.map( (element) => resourceList.push(<Resource description={element.description} location={element.location} linktext={element.linktext} />));
+   
+   return (
+     <div className="App">
+       <Bio />
+       {resourceList}
+     </div>
+   );
+ }
+}
+
+export default App;
