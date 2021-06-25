@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import steve from './steve1.jpg';
 
-class Jobs01 extends Component {
+class Bio extends Component {
  render() {
    return (
      <div>
@@ -24,4 +24,4 @@ class Jobs01 extends Component {
  }
 }
 
-export default Jobs01;
+export default Bio;
