@@ -14,6 +14,7 @@ class App extends Component {
      <div className="App">
        <h1>Steve Jobs Resources</h1>
        {resourceList}
+       <hr />
      </div>
    );
  }
