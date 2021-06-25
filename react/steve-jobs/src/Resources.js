@@ -8,7 +8,7 @@ class App extends Component {
  render() {
 
    let resourceList = []
-   the_resources.map( (element) => resourceList.push(<Resource description={element.description} location={element.location} linktext={element.linktext} />));
+   the_resources.map( (element, index) => resourceList.push(<Resource key={index} description={element.description} location={element.location} linktext={element.linktext} />));
    
    return (
      <div className="App">

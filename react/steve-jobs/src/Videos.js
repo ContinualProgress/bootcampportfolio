@@ -6,7 +6,7 @@ class Videos extends Component {
  render() {
 
    let videosList = []
-   links.map( (element) => videosList.push(<Video description={element.description} location={element.location} />));
+   links.map( (element, index) => videosList.push(<Video key={index} description={element.description} location={element.location} />));
    
    return (
      <div className="Videos">
