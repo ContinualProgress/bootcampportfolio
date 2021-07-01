@@ -9,7 +9,7 @@ const LocalStrategy = require("passport-local");
 const passportLocalMongoose = require("passport-local-mongoose");
 
 const logger = require("morgan");
-app.use(logger("combined") );
+app.use(logger("dev") );
 
 app.set("view engine", "ejs");  //adding this line makes it so we don't have to specify .ejs for file names
 
@@ -30,10 +30,10 @@ mongoose.connect(keys.mongoURI,
 
 
 //blueprints
-let userSchema = mongoose.Schema({
+let TenderSchema = mongoose.Schema({
   firstName: String,
   lastName: String,
-  userName: String,
+  username: String,
   password: String,
   email: String,
   pic: String,
@@ -45,7 +45,7 @@ let userSchema = mongoose.Schema({
 });
 
 
-let UserModel =  mongoose.model( "users", userSchema);
+let TenderModel =  mongoose.model( "users", TenderSchema);
 
 
 
@@ -87,12 +87,14 @@ app.get("/results", isLoggedIn, function(req, res) { //isLoggedIn is middleware 
   //this where all the magic happens
 
   console.log("The username in question:  " + req.user.username);
-  //let username = req.user.username;
+  let interests;
+  let interestsArray = [];
+  let aggregateQuery;
   //res.render("results", {data:username});
 
 
   let username = req.user.username;
-  UserModel.find({userName: username}, function(error, doc){
+  TenderModel.find({username: username}, function(error, doc){
 
     if(error)
     {
@@ -102,12 +104,46 @@ app.get("/results", isLoggedIn, function(req, res) { //isLoggedIn is middleware 
     {
       console.log("Success:  ", doc);
       console.log(typeof doc);
-    }
+      //console.log("Interests isolated:  " + doc[0].interests);
+      interests = doc[0].interests;
+      console.log("Interests isolated:  " + interests);
+      console.log("What type is the interests:" + typeof interests);
+      console.log("What are the keys of interests:" + Object.keys(interests) );
+
+      Object.keys(interests).forEach((elem) => {
+
+        interestsArray.push(interests[elem]); 
+
+      });
+
+     
+     console.log("InterestsArray:  " + interestsArray);
+     console.log("What is the type of InterestsArray:  " + typeof interestsArray);
+     
+ 
+    }// else
+
+  });// end find
+
+  aggregateQuery = [{$addFields:{"Most_Matched":{$size:{$setIntersection: ["$interests", interestsArray]} } } }, {$sort: {"Most_Matched": -1}}, {$limit: 3}] ;
+  TenderModel.aggregate(aggregateQuery, function(error, doc){
+
+    if(error)
+    {
+      console.log("An error occurred:  ", error);
+    }//end if
+    else
+    {
+      console.log("Success:  ", doc);
+    }// end else
+
 
   });
 
   res.render("results");
-});
+
+
+});// end /results
 
 
 
