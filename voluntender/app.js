@@ -1,24 +1,19 @@
 // Foundation
 const express = require("express");
-
 const app = express();
-
 const mongoose = require("mongoose");
 const passport = require('passport');
 const LocalStrategy = require("passport-local");
 const passportLocalMongoose = require("passport-local-mongoose");
 
+app.set("view engine", "ejs");  //adding this line makes it so we don't have to specify .ejs for file names
+app.use(express.static("public")); //connects express to the "public" folder where we made a css file
+const keys = require("./config/keys"); //links to private api key in config folder so no one has access. dev.js is added to gitignore
+
+//Logger
 const logger = require("morgan");
 app.use(logger("dev") );
 
-app.set("view engine", "ejs");  //adding this line makes it so we don't have to specify .ejs for file names
-
-app.use(express.static("public")); //connects express to the "public" folder where we made a css file
-
-const keys = require("./config/keys"); //links to private api key in config folder so no one has access. dev.js is added to gitignore
-
-
-//DATABASE STUFF
 
 mongoose.connect(keys.mongoURI,
   { //must use two lines of code below for mongoose to work
@@ -27,37 +22,10 @@ mongoose.connect(keys.mongoURI,
   })
   .then(()=> console.log("Connected to VolunTender database")) //console logs to make sure it's connected
   .catch((error) => console.log(error));//otherwise console logs error
-
-
-//blueprints
-let TenderSchema = mongoose.Schema({
-  firstName: String,
-  lastName: String,
-  username: String,
-  password: String,
-  email: String,
-  pic: String,
-  gender: String,
-  ageRange: String,
-  bio: String,
-  interests: [String],
-  lookingFor: [String]
-});
-
-
-let TenderModel =  mongoose.model( "users", TenderSchema);
-
-
-
-
-
-
-
-
-
 app.use(express.urlencoded({extended: true}));
 
 let User = require("./models/user"); //connects to user file in models folder
+let Org = require("./models/orgs"); //connects to user file in models folder
 
 app.use(require('express-session')({
   secret: "Blah blah blah", //used to calculate the hash to protect our password from3rd party hijackers
@@ -77,107 +45,119 @@ app.get("/", function(req, res) {  //links to home.ejs page
 });
 
 
-
-
-
-function getInterests(uname, iArray) {
-  
-  //Coming Soon
-  let interests;
-  //let iArray = [];
-  //let iArray = new Object;
-  User.find({username: uname}, function(error, doc){
-    
-    if(error)
-    {
-      console.log("An error occurred:  ", error);
-    } 
-    else
-    { 
-      console.log("Success:  ", doc);
-      console.log(typeof doc);
-      //console.log("Interests isolated:  " + doc[0].interests);
-      interests = doc[0].interests; 
-      console.log("Interests isolated:  " + interests);
-      console.log("What type is the interests:" + typeof interests);
-      console.log("What are the keys of interests:" + Object.keys(interests) );
-        
-      Object.keys(interests).forEach((elem) => {
-      
-        iArray.push(interests[elem]);
-      });
-     
-     
-     console.log("iArray:  " + iArray);
-     console.log("What is the type of iArray:  " + typeof iArray);
-    
-  
-    }// else
-  });// end find
-  
-  //return iArray;
-}// end getInterests
-
-
+var matches = new Array();
 
 function getMatches(interestsArray) {
 
-  let aggregateQuery = [{$addFields:{"Most_Matched":{$size:{$setIntersection: ["$interests", interestsArray ]} } } }, {$sort: {"Most_Matched": -1}}, {$limit: 3}] ;
-
- 
-  let matches; 
-  User.aggregate(aggregateQuery, function(error, doc){
-
-    if(error)
-    {
-      console.log("An error occurred:  ", error);
-    }//end if
-    else
-    {
-      console.log("Success:  ", doc);
-      matches = doc;
-    }// end else
+  let aggregateQuery = [{$addFields:{"Most_Matched":{$size:{$setIntersection: ["$interests", interestsArray ]} } } }, {$sort: {"Most_Matched": -1}}, {$limit: 4}];
 
 
-  });
+  var query = User.aggregate(aggregateQuery);
+  return query;
 
-
-  return matches;
 }// end getMatches
 
 
+async function getOrganizations(commonInterests) {
+
+  var commonInterestsQuery = {"interests":{$in: commonInterests}}; 
+
+  /*
+  var query = await Org.find(commonInterestsQuery, function(err, result){
+
+    if(err)
+    {
+      console.log(err);
+      return err;
+    }
+
+    else
+    {
+      
+    }
+
+  });
+  */
+
+  
+  var queryResults = await Org.find(commonInterestsQuery).exec();
+
+  //console.log("Results from within getOrganizations function:  " + query);
+  console.log("Results from within getOrganizations function:  " + queryResults);
+  
+  //return query;
+  return queryResults;
+
+}// end getOrganizations
 
 
 
 app.get("/results", isLoggedIn, function(req, res) { //isLoggedIn is middleware that only allows results page to show if you're logged in
 
-
-  //this where all the magic happens
-
+  //The following console.log lines are to check/verify that the correct username and interests array are accessible via the request body.
   console.log("The username in question:  " + req.user.username);
+  console.log("The user\'s interests are:" + req.user.interests);
 
 
-  //let interestsArray;
-  let interestsArray = [];
+  //The interests and username of the currently logged in user are stored in local variables.
+  let interestsArray = req.user.interests;
   let username = req.user.username;
 
 
-  //interestsArray = getInterests(username);
-  interestsArray = ['animals', 'environment', 'community', 'housing'];
-
-
-  getInterests(username, interestsArray);
   console.log("What is the value of interestsArray:  " + interestsArray);
- 
-  let results = getMatches(interestsArray)   
+
+  //The user's interests (interestArray) is passed to a function called getMatches, where a query object is returned and stored in local variable results.
+  let results = getMatches(interestsArray);
+
+
+  //The returned query is first checked for any errors.  If there no errors, the code iterates through all the documents via a forEach loop.  For each document/record,
+  //the field values are copied to a locally-defined object, which is then pushed into the matches array.  Finally, the matches array is passed to results.ejs.
+  results.exec(function(err, doc){
+
+    if(err)
+    {
+      console.log(err);
+      return err;
+    }
+    else
+    {
+      doc.forEach(function(elem){
+
+        if(elem.username === username)
+        {
+          return;
+        }
+        else
+        {
+	  var obj = {};
+	  var intersection = interestsArray.filter( x => elem.interests.includes(x) );
+          var organizations = getOrganizations(intersection); 
+
+          console.log("Result of calling getOrganizations from the result route...  " + organizations);
+   
+	  obj.firstName = elem.firstName;
+	  obj.lastName = elem.lastName;
+	  obj.username = elem.username;
+	  obj.gender = elem.gender; 
+	  obj.ageRange = elem.ageRange;
+	  obj.pic = elem.pic;
+	  obj.bio = elem.bio;
+	  obj.interests = intersection;
+
+
+	  matches.push(obj);
+        }
+
+      });
+      console.log("Matches:  " + matches);
+      console.log("First document: " + matches[0].lastName);
+      res.render("results", {matches: matches});
+    }
+
+  });
   
 
-  res.render("results");
-
-
 });// end /results
-
-
 
 
 
@@ -195,9 +175,25 @@ app.get("/login", function(req, res) { //brings us to user login page if already
   res.render("login");
 });
 
-//post rout that handles logic for registering user
+//post rout that handles logic for registering user & adding their info to database
 app.post("/signup", function(req, res) {
-  var newUser = new User({username: req.body.username});
+  // passport stuff:
+  console.log(req.body)
+  
+  var newUser = new User({
+    username: req.body.username,
+    password: req.body.pw,
+    firstName: req.body.fname,
+    lastName: req.body.lname,
+    email: req.body.email,
+    pic: req.body.avatar,
+    gender: req.body.gender,
+    ageRange: req.body.age,
+    bio: req.body.bio,
+    interests: req.body.interests,
+    lookingFor: req.body.lookingFor
+  });
+
   User.register(newUser, req.body.password, function(err, user) {
       if(err){
         console.log(err);
@@ -208,6 +204,10 @@ app.post("/signup", function(req, res) {
         });
       }
   })
+  
+  
+
+
 });
 
 //Login route logic

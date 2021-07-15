@@ -1,24 +1,116 @@
-body {font-family: Arial, Helvetica, sans-serif;}
-* {box-sizing: border-box;}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: none;
+  
+}
 
-/* Full-width input fields */
+h1 {
+ font-weight: bold; 
+ font-size: 4em;
+}
+
+body {
+  background-color: powderblue;
+  }
+
+.logo {
+  width: 80%;
+}
+
+label{
+  color: rgb(54, 54, 54);
+  font-size: 0.9rem;
+  letter-spacing: 0.01em;
+  margin-bottom: 5px;
+}
+
+#label-avatar1 {
+  background-image: url("../assets/images/Avatar1.png");
+}
+
+#label-avatar2 {
+  background-image: url("../assets/images/Avatar2.png");
+}
+
+#label-avatar3 {
+  background-image: url("../assets/images/Avatar3.png");
+}
+
+#label-avatar4 {
+  background-image: url("../assets/images/Avatar4.png");
+}
+
+#label-avatar5 {
+  background-image: url("../assets/images/Avatar5.png");
+}
+
+#label-avatar6 {
+  background-image: url("../assets/images/Avatar6.png");
+}
+
+#label-avatar7 {
+  background-image: url("../assets/images/Avatar7.png");
+}
+
+#label-avatar8 {
+  background-image: url("../assets/images/Avatar8.png");
+}
+
+.avatars {
+  width: 100px;
+  height: 100px;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-right: 10px;
+}
+
+form p {
+  color: rgb(54, 54, 54);
+  font-size: 0.9rem;
+  letter-spacing: 0.01em;
+  margin-bottom: 5px;
+}
+
+.padright {
+  margin-right: 10px;
+}
+
+p span {
+  color: rgb(185, 185, 185);
+  font-style: italic;
+}
+
 input[type=text], input[type=password] {
   width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
+  padding: 8px 15px;
+  margin: 0 0 30px 0;
   display: inline-block;
   border: none;
   background: #f1f1f1;
+  border-radius: 2px;
 }
 
-/* Add a background color when the inputs get focus */
 input[type=text]:focus, input[type=password]:focus {
   background-color: #ddd;
   outline: none;
 }
 
+textarea {
+  padding: 15px;
+  border-radius: 3px;
+}
+
+input[type=radio] {
+  background-color: yellow;
+  padding: 10px;
+  margin: 5px;
+}
+
 /* Set a style for all buttons */
-button {
+button, input[type=submit] {
   background-color: #04AA6D;
   color: white;
   padding: 14px 20px;
@@ -29,7 +121,7 @@ button {
   opacity: 0.9;
 }
 
-button:hover {
+button:hover, input[type=submit]:hover {
   opacity:1;
 }
 
@@ -45,9 +137,14 @@ button:hover {
   width: 50%;
 }
 
-/* Add padding to container elements */
 .container {
-  padding: 16px;
+  margin: 40px auto;
+  /* text-align: center; */
+  padding: 25px auto;
+}
+
+#homepage {
+  text-align: center;
 }
 
 /* The Modal (background) */
@@ -107,4 +204,3 @@ hr {
      width: 100%;
   }
 }
->>>>>>> Stashed changes
