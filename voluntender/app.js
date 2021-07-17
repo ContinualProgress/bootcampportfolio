@@ -27,6 +27,8 @@ app.use(express.urlencoded({extended: true}));
 let User = require("./models/user"); //connects to user file in models folder
 let Org = require("./models/orgs"); //connects to user file in models folder
 
+let Orgs = require("./models/orgs"); //connects to org file in models folder
+
 app.use(require('express-session')({
   secret: "Blah blah blah", //used to calculate the hash to protect our password from3rd party hijackers
   resave: false,
@@ -34,7 +36,7 @@ app.use(require('express-session')({
 }));
 
 app.use(passport.initialize()); //starts a session
-app.use(passport.session()); //allows access to sesion
+app.use(passport.session()); //allows access to session
 passport.use(new LocalStrategy(User.authenticate())); 
 passport.serializeUser(User.serializeUser()); //required to store data session
 passport.deserializeUser(User.deserializeUser()); //removes user session when they logout
@@ -58,37 +60,46 @@ function getMatches(interestsArray) {
 }// end getMatches
 
 
-async function getOrganizations(commonInterests) {
 
-  var commonInterestsQuery = {"interests":{$in: commonInterests}}; 
+//async function getOrganizations(commonInterests) {
+function getOrganizations(commonInterests) {
+
+  //var commonInterestsQuery = {"interests":{$in: commonInterests}};
+  //return await Org.find(commonInterestsQuery);
+
+
+  return Org.find({"interests":{$in: commonInterests}});
+  //return await Org.find({"interests":{$in: commonInterests}});
+  //return await Org.find({"interests":{$in: commonInterests}}).exec();
 
   /*
-  var query = await Org.find(commonInterestsQuery, function(err, result){
+  await Org.find({"interests":{$in: commonInterests}}).exec((error, doc) => {
 
-    if(err)
+    if(error)
     {
-      console.log(err);
-      return err;
+      console.log(error);
+      return error;
+    }
+    else 
+    {
+      var results = new Array();
+      doc.forEach((elem) =>{
+
+        results.push(elem.orgName);
+
+      });
+
+      console.log("Organizations:  " + results);
+      return results;
     }
 
-    else
-    {
-      
-    }
-
-  });
+  })// end find
   */
 
   
-  var queryResults = await Org.find(commonInterestsQuery).exec();
 
-  //console.log("Results from within getOrganizations function:  " + query);
-  console.log("Results from within getOrganizations function:  " + queryResults);
-  
-  //return query;
-  return queryResults;
+}// end getOrganizations 
 
-}// end getOrganizations
 
 
 
@@ -131,9 +142,8 @@ app.get("/results", isLoggedIn, function(req, res) { //isLoggedIn is middleware 
         {
 	  var obj = {};
 	  var intersection = interestsArray.filter( x => elem.interests.includes(x) );
-          var organizations = getOrganizations(intersection); 
 
-          console.log("Result of calling getOrganizations from the result route...  " + organizations);
+
    
 	  obj.firstName = elem.firstName;
 	  obj.lastName = elem.lastName;
@@ -143,16 +153,90 @@ app.get("/results", isLoggedIn, function(req, res) { //isLoggedIn is middleware 
 	  obj.pic = elem.pic;
 	  obj.bio = elem.bio;
 	  obj.interests = intersection;
-
-
 	  matches.push(obj);
+
         }
 
-      });
-      console.log("Matches:  " + matches);
-      console.log("First document: " + matches[0].lastName);
-      res.render("results", {matches: matches});
-    }
+      }); // end forEach
+
+
+
+
+
+
+
+
+      //matches.forEach((elem) =>{
+      matches.forEach((elem, key, arr) =>{
+
+        console.log("\n\nFor the given match:  " + elem);
+
+        console.log("Declaring an empty array...");
+        var organizations = new Array();
+
+        //For each record, match up organizations to candidates based on interests.
+        console.log("Common interests...  " + elem.interests);
+
+
+
+        /*
+        getOrganizations(elem.interests) 
+        .then((element) =>{
+
+          element.forEach((org) =>{
+            console.log("Result of calling getOrganizations from the result route...  " + org.orgName);
+            organizations.push(org.orgName);
+          })// end forEach
+
+          console.log("Organizations Array...  " + organizations);
+	  elem.organizations = organizations;
+
+        })// end then
+        */
+
+
+
+
+
+
+
+        var results2 = getOrganizations(elem.interests);
+        results2.exec(function(err, doc){
+
+          if(err)
+          {
+            console.log(err);
+          }// end if
+          else
+          {
+            doc.forEach((org)=>{
+
+              organizations.push(org.orgName);
+            });// doc.forEach
+
+            elem.organizations = organizations;
+            console.log("The array of organizations..." + elem.organizations);
+             
+          }// end else
+
+
+	  if (Object.is(arr.length - 1, key)) {
+	    // execute last item logic
+	    //console.log(`Last callback call at index ${key} with value ${val}` ); 
+            res.render("results", {matches: matches});
+	  }
+        
+
+        });// end results2.exec
+
+
+      });// end matches.forEach
+
+
+
+      //res.render("results", {matches: matches});
+
+    }// end else
 
   });
   
@@ -160,14 +244,14 @@ app.get("/results", isLoggedIn, function(req, res) { //isLoggedIn is middleware 
 });// end /results
 
 
-
+  
 
 
 app.get("/signup", function(req, res) { //brings us to sign up page and profile questions
   res.render("signup");
 });
 
-app.get("/orgSignUp", function(req, res) { //brings us to dummy (for now) org signup page
+app.get("/orgSignup", function(req, res) { //brings us to dummy (for now) org signup page
   res.render("orgSignup");
 });
 
@@ -175,7 +259,15 @@ app.get("/login", function(req, res) { //brings us to user login page if already
   res.render("login");
 });
 
-//post rout that handles logic for registering user & adding their info to database
+app.get("/dashboard", isLoggedIn, function(req, res) { //brings us to user dashboard. isLoggedIn means it's only accessible when logged in
+  res.render("dashboard");
+});
+
+app.get("/orgThanks", isLoggedIn, function(req, res) { //brings us to thank you page where they can logout (unless I can get submit button to logout at same time)
+  res.render("orgThanks");
+});
+
+//post route that handles logic for registering user & adding their info to database
 app.post("/signup", function(req, res) {
   // passport stuff:
   console.log(req.body)
@@ -200,19 +292,42 @@ app.post("/signup", function(req, res) {
         return res.render("signup")
       } else {
         passport.authenticate("local")(req, res, function() {
-          res.redirect("/results");
+          res.redirect("/dashboard");
         });
       }
   })
-  
-  
+});
 
+//post route that handles logic for adding org info to database
+app.post("/orgSignup", function(req, res) {
+  // passport stuff:
+  console.log(req.body)
+  
+  var newOrgs = new Orgs({
+    username: req.body.username,
+    password: req.body.pw,
+    orgName: req.body.orgName,
+    mission: req.body.mission,
+    website: req.body.website,
+    interests: req.body.interests
+  });
 
+  Orgs.register(newOrgs, req.body.password, function(err, orgs) {
+      if(err){
+        console.log(err);
+        return res.render("orgSignup")
+      } else {
+        passport.authenticate("local")(req, res, function() {
+          // redirect might change
+          res.redirect("/orgThanks");
+        });
+      }
+  })  
 });
 
 //Login route logic
 app.post('/login', passport.authenticate('local', { //passport.authenticate is known as middleware (code that runs before callback function)
-  successRedirect: '/results', // if successful, will send to newsfeed page
+  successRedirect: '/dashboard', // if successful, will send to dashboard page
   failureRedirect: '/login' //if it doesn't work, will redirect back to login screen
 }), function(req, res) {
   //don't need anything in our callback function
