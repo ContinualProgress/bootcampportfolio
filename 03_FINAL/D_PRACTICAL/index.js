@@ -25,10 +25,6 @@ app.get("/", function(req, res){
 
 app.get("/getData", (req, res)=>{
 
-  console.log(req);
-  //console.log(req);
-  
-
   
   var baseUrl = "http://api.giphy.com/v1/gifs/search";
   var query = req.query.searchData;
@@ -50,10 +46,7 @@ app.get("/getData", (req, res)=>{
   });
 
 
-
-
 });
-
 
 
 
