@@ -1,0 +1,125 @@
+
+<% let ran = Math.floor((Math.random() * matches.length) + 1); %>
+
+<%var countMatch = 0 %>
+
+<div class="row row-cols-1 row-cols-md-3">
+  <div class="col mb-4">
+    <div class="card h-100">
+
+      <div class="card-header">
+	<input
+          id="first-input"
+	  type="checkbox"
+	  name="username"
+	  value="<%= matches[countMatch]._id %>">
+	<span><h3 class="card-title" id="first-user" ><%= matches[countMatch].username %></h3></span>
+      </div>
+
+      <img id="first-image" src="<%= matches[countMatch].pic %>" class="card-img-top" alt="avatar image">
+				    <% console.log(matches[countMatch]) %>
+      <div class="card-body">
+	<p class="card-text" id="first-gender" >Gender: <%= matches[countMatch].gender %></p>
+	<p class="card-text" id="first-age" >Age Range: <%= matches[countMatch].ageRange %></p>
+	<p class="card-text" id="first-bio" >About myself: <%= matches[countMatch].bio %></p>
+	<p class="card-text" id="first-interests">
+	  Interests in common: <%= matches[countMatch].interests %>
+	</p>
+	<p class="card-text">
+	  Relevant Organizations: <%= matches[countMatch].organizations %>
+	</p>
+	<a
+	  class="btn btn-success btn-lg btn-block"
+	  href="/chat"
+	  role="button">Chatcord</a>
+      </div> <!-- end card-body -->
+
+    </div> <!-- end card -->
+  </div> <!-- end col -->
+
+
+  <% ran = Math.floor((Math.random() * matches.length) + 1); %>
+  <% countMatch+=1 %>
+  <div class="col mb-4">
+    <div class="card h-100">
+
+      <div class="card-header">
+	<input
+	  type="checkbox"
+	  name="username"
+	  value="<%= matches[countMatch]._id %>">
+	<span><h3 class="card-title"><%= matches[countMatch].username %></h3></span>
+      </div>
+
+      <img src="<%= matches[countMatch].pic %>" class="card-img-top" alt="avatar image">
+				    <% console.log(matches[countMatch]) %>
+      <div class="card-body">
+	<p class="card-text">Gender: <%= matches[countMatch].gender %></p>
+	<p class="card-text">Age Range: <%= matches[countMatch].ageRange %></p>
+	<p class="card-text">About myself: <%= matches[countMatch].bio %></p>
+	<p class="card-text">
+	  Interests in common: <%= matches[countMatch].interests %>
+	</p>
+	<p class="card-text">
+	  Relevant Organizations: <%= matches[countMatch].organizations %>
+	</p>
+	<a
+	  class="btn btn-success btn-lg btn-block"
+	  href="/chat"
+	  role="button">Chatcord</a>
+      </div> <!-- end card-body -->
+
+    </div> <!-- end card -->
+  </div> <!-- end col -->
+
+
+  <% ran = Math.floor((Math.random() * matches.length) + 1); %>
+  <% countMatch+=1 %>
+  <div class="col mb-4">
+    <div class="card h-100">
+
+      <div class="card-header">
+	<input
+	  type="checkbox"
+	  name="username"
+	  value="<%= matches[countMatch]._id %>">
+	<span><h3 class="card-title"><%= matches[countMatch].username %></h3></span>
+      </div>
+
+      <img src="<%= matches[countMatch].pic %>" class="card-img-top" alt="avatar image">
+				    <% console.log(matches[countMatch]) %>
+      <div class="card-body">
+	<p class="card-text">Gender: <%= matches[countMatch].gender %></p>
+	<p class="card-text">Age Range: <%= matches[countMatch].ageRange %></p>
+	<p class="card-text">About myself: <%= matches[countMatch].bio %></p>
+	<p class="card-text">
+	  Interests in common: <%= matches[countMatch].interests %>
+	</p>
+	<p class="card-text">
+	  Relevant Organizations: <%= matches[countMatch].organizations %>
+	</p>
+	<a
+	  class="btn btn-success btn-lg btn-block"
+	  href="/chat"
+	  role="button">Chatcord</a>
+      </div> <!-- end card-body -->
+
+    </div> <!-- end card -->
+  </div> <!-- end col -->
+
+</div> <!-- end row -->
+
+<% function update_first() { %>
+
+  <% countMatch += 1; %>
+  document.getElementById("first-input").value = <%= matches[countMatch]._id %>;
+  document.getElementById("first-user").innerHTML= <%= matches[countMatch].username %>;
+  document.getElementById("first-image").src = <%= matches[countMatch].pic %>;
+  document.getElementById("first-gender").innerHTML = <%= matches[countMatch].gender %>;
+  document.getElementById("first-age").innerHTML = <%= matches[countMatch].ageRange %>;
+  document.getElementById("first-bio").innerHTML = <%= matches[countMatch].bio%>;
+  document.getElementById("first-interests").innerHTML = <%= matches[countMatch].interests%>;
+  document.getElementById("first-interests").innerHTML= <%= matches[countMatch].organizations%>;
+
+
+<% } %>
