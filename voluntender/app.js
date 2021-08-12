@@ -85,21 +85,14 @@ app.get("/", function(req, res) {  //links to home.ejs page
 //var matches = new Array();
 
 function getMatches(interestsArray) {
-
   let aggregateQuery = [{$addFields:{"Most_Matched":{$size:{$setIntersection: ["$interests", interestsArray ]} } } }, {$sort: {"Most_Matched": -1}}];
-
-
   var query = User.aggregate(aggregateQuery);
   return query;
-
 }// end getMatches
 
 function getOrganizations(commonInterests) {
-
     return Org.find({"interests":{$in: commonInterests}});
-  
 }// end getOrganizations 
-
 
 app.get("/results", isLoggedIn, function(req, res) { //isLoggedIn is middleware that only allows results page to show if you're logged in
 
@@ -108,64 +101,45 @@ app.get("/results", isLoggedIn, function(req, res) { //isLoggedIn is middleware 
   // console.log("The username in question:  " + req.user.username);
   // console.log("The user\'s interests are:" + req.user.interests);
 
-
   //The interests and username of the currently logged in user are stored in local variables.
   let interestsArray = req.user.interests;
   let username = req.user.username;
-
 
   // console.log("What is the value of interestsArray:  " + interestsArray);
 
   //The user's interests (interestArray) is passed to a function called getMatches, where a query object is returned and stored in local variable results.
   let results = getMatches(interestsArray);
 
-
   //The returned query is first checked for any errors.  If there no errors, the code iterates through all the documents via a forEach loop.  For each document/record,
   //the field values are copied to a locally-defined object, which is then pushed into the matches array.  Finally, the matches array is passed to results.ejs.
   results.exec(function(err, doc){
-
-    if(err)
-    {
+    if(err) {
       console.log(err);
       return err;
-    }
-    else
-    {
+    } else {
       doc.forEach(function(elem){
-
-        if(elem.username === username)
-        {
+        if(elem.username === username) {
           return;
-        }
-        else
-        {
-	  var obj = {};
-	  var intersection = interestsArray.filter( x => elem.interests.includes(x) );
-          if(intersection.length === 0)
+        } else {
+          var obj = {};
+          var intersection = interestsArray.filter(x => elem.interests.includes(x));
+          if (intersection.length === 0)
             return;
           console.log("Intersection array:  ", intersection);
 
-   
-	  obj.firstName = elem.firstName;
-	  obj.lastName = elem.lastName;
-	  obj.username = elem.username;
-	  obj.gender = elem.gender; 
-	  obj.ageRange = elem.ageRange;
-	  obj.pic = (elem.pic.length > 10) ? elem.pic : "/assets/images/Avatar1.png"; // show uploaded img if exists; else avatar
-	  obj.bio = elem.bio;
-	  obj.interests = intersection;
+          obj.firstName = elem.firstName;
+          obj.lastName = elem.lastName;
+          obj.username = elem.username;
+          obj.gender = elem.gender;
+          obj.ageRange = elem.ageRange;
+          obj.pic = (elem.pic.length > 10) ? elem.pic : "/assets/images/Avatar1.png"; // show uploaded img if exists; else avatar
+          obj.bio = elem.bio;
+          obj.interests = intersection;
           obj._id = elem._id; // adding access to unique id
-	  matches.push(obj);
-
+          matches.push(obj);
         }
 
       }); // end forEach
-
-
-
-
-
-
 
       //The following code will iterate through each of the matches and generate a list/array of shared interests between the logged-in user and the match in question.
       matches.forEach((elem, key, arr) =>{
@@ -177,9 +151,6 @@ app.get("/results", isLoggedIn, function(req, res) { //isLoggedIn is middleware 
 
         //For each record, match up organizations to candidates based on interests.
         console.log("Common interests...  " + elem.interests);
-
-
-
 
         var results2 = getOrganizations(elem.interests);
         results2.exec(function(err, doc){
@@ -207,20 +178,14 @@ app.get("/results", isLoggedIn, function(req, res) { //isLoggedIn is middleware 
             res.render("results", {matches: matches});
 	  }
         
-
         });// end results2.exec
 
-
       });// end matches.forEach
-
-
-
 
     }// end else
 
   });
   
-
 });// end /results
 
 
